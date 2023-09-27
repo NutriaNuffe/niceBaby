@@ -1,0 +1,42 @@
+{
+	"info": {
+		"_postman_id": "b433693f-6c04-4e36-9454-eef70c32f82a",
+		"name": "nice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26469706"
+	},
+	"item": [
+		{
+			"name": "使用者註冊",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": 123,\r\n  \"account\": \"test01@gmail.com\",\r\n  \"password\": \"123\",\r\n  \"firstName\": \"John\",\r\n  \"lastName\": \"Doe\",\r\n  \"sex\": 0,\r\n  \"phone\": \"0912345678\",\r\n  \"title\": \"1\",\r\n  \"department\": 1,\r\n  \"address\": \"Main Street\",\r\n  \"avatar\": \"https://example.com/avatar.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/mall/api/v1/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mall",
+						"api",
+						"v1",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

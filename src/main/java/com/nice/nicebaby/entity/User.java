@@ -1,17 +1,22 @@
 package com.nice.nicebaby.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Timestamp;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "user")
 public class User {
     @Id
@@ -26,6 +31,7 @@ public class User {
 
     @Column(name = "password", length = 100)
     @Schema(description = "密碼")
+    @JsonIgnore
     private String password;
 
     @Column(name = "firstName", length = 50)
@@ -44,9 +50,9 @@ public class User {
     @Schema(description = "電話")
     private String phone;
 
-    @Column(name = "title", length = 50)
+    @Column(name = "title")
     @Schema(description = "職稱")
-    private String title;
+    private Integer title;
 
     @Column(name = "department")
     @Schema(description = "部門")
@@ -60,13 +66,15 @@ public class User {
     @Schema(description = "使用者圖片")
     private String avatar;
 
-    @Column(name = "createDate")
+    @CreatedDate
+    @Column(name = "createDate", columnDefinition = "TIMESTAMP")
     @Schema(description = "創建日期")
-    private Date createDate;
+    private Timestamp createDate;
 
-    @Column(name = "lastModifiedDate")
+    @LastModifiedDate
+    @Column(name = "lastModifiedDate", columnDefinition = "TIMESTAMP")
     @Schema(description = "修改日期")
-    private Date lastModifiedDate;
+    private Timestamp lastModifiedDate;
 
     public Long getId() {
         return userId;
