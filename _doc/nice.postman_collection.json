@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"userId\": 123,\r\n  \"account\": \"test01@gmail.com\",\r\n  \"password\": \"123\",\r\n  \"firstName\": \"John\",\r\n  \"lastName\": \"Doe\",\r\n  \"sex\": 0,\r\n  \"phone\": \"0912345678\",\r\n  \"title\": \"1\",\r\n  \"department\": 1,\r\n  \"address\": \"Main Street\",\r\n  \"avatar\": \"https://example.com/avatar.jpg\"\r\n}",
+					"raw": "{\r\n  \"account\": \"test01@gmail.com\",\r\n  \"password\": \"123\",\r\n  \"firstName\": \"John\",\r\n  \"lastName\": \"Doe\",\r\n  \"sex\": 0,\r\n  \"phone\": \"0912345678\",\r\n  \"title\": 1,\r\n  \"department\": 1,\r\n  \"address\": \"Main Street\",\r\n  \"avatar\": \"https://example.com/avatar.jpg\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,18 +21,50 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/mall/api/v1/users/register",
+					"raw": "http://localhost:8080/nice/api/v1/user/register",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"mall",
+						"nice",
 						"api",
 						"v1",
-						"users",
+						"user",
 						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "使用者登入",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"account\": \"test01@gmail.com\",\r\n  \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/nice/api/v1/user/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"nice",
+						"api",
+						"v1",
+						"user",
+						"login"
 					]
 				}
 			},

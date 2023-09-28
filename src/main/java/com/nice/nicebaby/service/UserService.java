@@ -1,14 +1,12 @@
 package com.nice.nicebaby.service;
 
-//import com.nice.nicebaby.dao.UserDao;
-//import com.nice.nicebaby.dao.daoInterface.UserDaoInterface;
-//import com.nice.nicebaby.model.User;
-
 import com.nice.nicebaby.dao.UserDao;
+import com.nice.nicebaby.dto.user.ReqUserLogin;
 import com.nice.nicebaby.dto.user.ReqUserRegister;
 import com.nice.nicebaby.entity.User;
 import com.nice.nicebaby.repository.UserRepository;
-import com.nice.nicebaby.util.httpResultUtil.HttpResult;
+import com.nice.nicebaby.util.HttpResult;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
-import static com.nice.nicebaby.define.ErrorId.Account_Already_Registered;
-import static com.nice.nicebaby.define.ErrorId.Success;
+import static com.nice.nicebaby.define.ErrorId.*;
 
 @Service
 public class UserService {
@@ -28,14 +25,8 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
-//    @Autowired
-//    private UserDaoInterface userDaoInterface;
-
-
     @Transactional
     public List<User> findByAllUser() {
-//        return userDao.getAllUser();
-//        return userDaoInterface.findAll();
         return user.findAllUsers();
     }
 
@@ -52,12 +43,33 @@ public class UserService {
         // 創建帳號
         User newUser = new User();
         BeanUtils.copyProperties(reqUserRegister, newUser);
-        user = userDao.saveAndFlush(newUser);
 
-        // TODO** 將密碼加密
+        // 將密碼加密
+        String hashPassword = BCrypt.hashpw(reqUserRegister.getPassword(), BCrypt.gensalt());
+        newUser.setPassword(hashPassword);
+
+        user = userDao.saveAndFlush(newUser);
 
         return new HttpResult<>(Success, user);
 
+    }
+
+    public HttpResult<User> login(ReqUserLogin reqUserLogin) {
+
+        User user = userDao.findByAccount(reqUserLogin.getAccount());
+
+        // 檢查 User 是否存在
+        if (user == null) {
+            return new HttpResult<>(Email_Not_Registered, null);
+        }
+
+        boolean passwordMatches = BCrypt.checkpw(reqUserLogin.getPassword(), user.getPassword());
+
+        if (passwordMatches) {
+            return new HttpResult<>(Success, user);
+        } else {
+            return new HttpResult<>(Password_Incorrect, null);
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-package com.nice.nicebaby.util.httpResultUtil;
+package com.nice.nicebaby.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

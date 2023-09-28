@@ -1,8 +1,8 @@
 plugins {
-	id 'java'
-	id 'war'
-	id 'org.springframework.boot' version '2.7.10'
-	id 'io.spring.dependency-management' version '1.1.0'
+    id 'java'
+    id 'war'
+    id 'org.springframework.boot' version '2.7.10'
+    id 'io.spring.dependency-management' version '1.1.0'
 }
 
 group = 'com.nice'
@@ -10,31 +10,29 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'com.mysql:mysql-connector-j'
-	annotationProcessor 'org.projectlombok:lombok'
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
- 	runtimeOnly 'com.h2database:h2'
-	 // Swagger
-	implementation group: 'org.springdoc', name: 'springdoc-openapi-core', version: '1.1.49'
-	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.5.13'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    annotationProcessor 'org.projectlombok:lombok'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    runtimeOnly 'com.h2database:h2'
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-core', version: '1.1.49'
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.5.13'
+    implementation 'org.mindrot:jbcrypt:0.4'
 
-
-    implementation 'org.springframework.boot:spring-boot-starter-web' // Spring Boot Web
 //    testImplementation ('org.springframework.boot:spring-boot-starter-test') {
 //        exclude group: 'junit', module: 'junit' // 排除JUnit 4的依賴
 //    }
