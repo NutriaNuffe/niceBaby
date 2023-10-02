@@ -4,6 +4,7 @@ package com.nice.nicebaby.controller;
 
 import com.nice.nicebaby.dto.user.ReqUserLogin;
 import com.nice.nicebaby.dto.user.ReqUserRegister;
+import com.nice.nicebaby.dto.user.RespUserLogin;
 import com.nice.nicebaby.entity.User;
 import com.nice.nicebaby.service.UserService;
 import com.nice.nicebaby.util.HttpResult;
@@ -11,6 +12,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -28,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public HttpResult<User> login(@RequestBody @Valid ReqUserLogin reqUserLogin) {
+    public HttpResult<RespUserLogin> login( @RequestBody @Valid ReqUserLogin reqUserLogin) {
         return userService.login(reqUserLogin);
     }
 

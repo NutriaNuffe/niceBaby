@@ -1,64 +1,35 @@
 package com.nice.nicebaby.util;
 
-import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.bouncycastle.openssl.PEMDecryptorProvider;
-import org.bouncycastle.openssl.PEMEncryptedKeyPair;
-import org.bouncycastle.openssl.PEMKeyPair;
-import org.bouncycastle.openssl.PEMParser;
-import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
-import org.bouncycastle.openssl.jcajce.JcePEMDecryptorProviderBuilder;
+import com.nice.nicebaby.entity.User;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-import java.io.ByteArrayInputStream;
-import java.io.StringReader;
-import java.security.KeyPair;
-import java.security.Provider;
-import java.security.Security;
-import java.security.cert.Certificate;
-import java.security.cert.CertificateFactory;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
+@Component
 public class JwtUtil {
 
-    static RSAPublicKey rsaPublicKey;
-    static RSAPrivateKey rsaPrivateKey;
+    @Value("${jwt.secret}")
+    private String secret;
 
-    public static int init(final String crt, final String privateKey) {
-        if (Security.getProvider("BC") == null) {
-            Security.addProvider((Provider) new BouncyCastleProvider());
-        }
-        try {
-            CertificateFactory cf = CertificateFactory.getInstance("X.509", "BC");
-            Certificate crtObj = cf.generateCertificate(new ByteArrayInputStream(crt.getBytes()));
-            JwtUtil.rsaPublicKey = (RSAPublicKey) crtObj.getPublicKey();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (privateKey != null) {
-            try {
-                PEMParser pemParser = new PEMParser(new StringReader(privateKey));
-                Object object = pemParser.readObject();
-                PEMDecryptorProvider decProv = new JcePEMDecryptorProviderBuilder().build("".toCharArray());
-                JcaPEMKeyConverter converter = new JcaPEMKeyConverter().setProvider("BC");
-
-                if (object instanceof PEMEncryptedKeyPair) {
-                    System.out.println("Encrypted key - using provided password");
-                    KeyPair kp = converter.getKeyPair(((PEMEncryptedKeyPair) object).decryptKeyPair(decProv));
-                    JwtUtil.rsaPrivateKey = (RSAPrivateKey) kp.getPrivate();
-                } else if (object instanceof PrivateKeyInfo) {
-                    JwtUtil.rsaPrivateKey = (RSAPrivateKey) converter.getPrivateKey((PrivateKeyInfo) object);
-                } else if (object instanceof PEMKeyPair) {
-                    KeyPair kp = converter.getKeyPair((PEMKeyPair) object);
-                    JwtUtil.rsaPrivateKey = (RSAPrivateKey) kp.getPrivate();
-                } else {
-                    System.err.println("Unsupported private key type.");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return 0;
+    public String generateToken(User user) {
+        Integer expires_sec = 1 * 60 * 60; //1H
+        Date expires = Date.from(LocalDateTime.now().plusSeconds(expires_sec).atZone(ZoneId.systemDefault()).toInstant());
+        SecretKey key = new SecretKeySpec(secret.getBytes(), SignatureAlgorithm.HS512.getJcaName());
+        return Jwts.builder()
+                .setSubject(String.valueOf(user.getUserId()))
+                .claim("userId", user.getUserId())
+                .claim("account", user.getAccount())
+                .setExpiration(expires)
+                .signWith(key)
+                .compact();
     }
 
 }
