@@ -1,7 +1,5 @@
 package com.nice.nicebaby.controller;
 
-//import com.nice.nicebaby.model.User;
-
 import com.nice.nicebaby.dto.user.ReqUserLogin;
 import com.nice.nicebaby.dto.user.ReqUserRegister;
 import com.nice.nicebaby.dto.user.RespUserLogin;
@@ -12,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -33,9 +32,10 @@ public class UserController {
         return userService.login(reqUserLogin);
     }
 
-    @GetMapping("/{userId}")
-    public HttpResult<User> findById(@PathVariable Long userId) {
-        return userService.findById(userId);
+    @GetMapping
+    public HttpResult<User> findById(HttpServletRequest request) {
+        User user = (User) request.getAttribute("LoginInfo");
+        return userService.findById(user.getUserId());
     }
 
     @GetMapping("/getUserInfoByAccount")

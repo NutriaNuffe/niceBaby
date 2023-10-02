@@ -77,12 +77,12 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcklkIjoxLCJhY2NvdW50IjoidGVzdDAxQGdtYWlsLmNvbSIsImV4cCI6MTY5NjIyNjc2M30.rKnSNb3DkvpSyOUqdlRhWAcf9wLx5l2JyMzx8CwzAR1zb7mp6MO-xE2bdvxasEtM8ZkToRlMAO6oGA4kPGOEYQ",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjEsImFjY291bnQiOiJ0ZXN0MDFAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiSm9obiIsInNleCI6MCwicGhvbmUiOiIwOTEyMzQ1Njc4IiwidGl0bGUiOjEsImRlcGFydG1lbnQiOjEsImFkZHJlc3MiOiJNYWluIFN0cmVldCIsImF2YXRhciI6Imh0dHBzOi8vZXhhbXBsZS5jb20vYXZhdGFyLmpwZyIsImV4cCI6MTY5NjIzMDA2M30.zToqQXnITwCaBw-wTE9ubkJceugCJrnMX08bXcgG9mRkrcKy6CCv8GB-vJE2HQuzTrxsnYibqo9CMSoXwJHUVw",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/nice/api/v1/user/:userId",
+					"raw": "http://localhost:8080/nice/api/v1/user",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -92,14 +92,7 @@
 						"nice",
 						"api",
 						"v1",
-						"user",
-						":userId"
-					],
-					"variable": [
-						{
-							"key": "userId",
-							"value": "1"
-						}
+						"user"
 					]
 				}
 			},
