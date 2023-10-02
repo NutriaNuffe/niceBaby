@@ -69,6 +69,41 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "根據使用者編號查詢使用者",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcklkIjoxLCJhY2NvdW50IjoidGVzdDAxQGdtYWlsLmNvbSIsImV4cCI6MTY5NjIyNjc2M30.rKnSNb3DkvpSyOUqdlRhWAcf9wLx5l2JyMzx8CwzAR1zb7mp6MO-xE2bdvxasEtM8ZkToRlMAO6oGA4kPGOEYQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/nice/api/v1/user/:userId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"nice",
+						"api",
+						"v1",
+						"user",
+						":userId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

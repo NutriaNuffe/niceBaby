@@ -13,9 +13,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 import static com.nice.nicebaby.define.ErrorId.*;
 
@@ -80,6 +80,18 @@ public class UserService {
         } else {
             return new HttpResult<>(Password_Incorrect, null);
         }
+    }
+
+    public HttpResult<User> findById(Long userId) {
+
+        Optional<User> userOptional = userDao.findById(userId);
+
+        if (userOptional.isPresent()) {
+            return new HttpResult<>(Success, userOptional.get());
+        } else {
+            return new HttpResult<>(Email_Not_Registered, null);
+        }
+
     }
 
 }
