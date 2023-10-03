@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 @Data
 public class RespUserLogin {
     @Schema(description = "使用者編號")
-    private Long userId;
+    private Long user_id;
 
     @Schema(description = "帳號")
     private String account;
@@ -19,10 +19,10 @@ public class RespUserLogin {
     private String password;
 
     @Schema(description = "名字")
-    private String firstName;
+    private String first_name;
 
     @Schema(description = "姓氏")
-    private String lastName;
+    private String last_name;
 
     @Schema(description = "性別（0: 男生, 1: 女生, 2: 其他）")
     private Integer sex;
@@ -43,10 +43,10 @@ public class RespUserLogin {
     private String avatar;
 
     @Schema(description = "創建日期")
-    private Timestamp createDate;
+    private Timestamp create_date;
 
     @Schema(description = "修改日期")
-    private Timestamp lastModifiedDate;
+    private Timestamp last_modified_date;
     private String token;
 
 }

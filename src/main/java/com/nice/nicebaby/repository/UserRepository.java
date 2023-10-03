@@ -1,12 +1,12 @@
 package com.nice.nicebaby.repository;
 //import com.nice.nicebaby.model.User;
+
 import com.nice.nicebaby.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -24,9 +24,9 @@ public class UserRepository {
     }
 
     public User findById(Long id) {
-        User user =  entityManager.find(User.class, id);
+        User user = entityManager.find(User.class, id);
 
-        logger.info("User -> {}" , user);
+        logger.info("User -> {}", user);
 
         return user;
     }
@@ -41,7 +41,7 @@ public class UserRepository {
 
     public void update() {
         User user = findById(1L);
-        user.setFirstName("Jane");
+        user.setFirst_name("Jane");
 
         entityManager.merge(user);
 

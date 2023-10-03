@@ -30,9 +30,9 @@ public class JwtUtil {
         Date expires = Date.from(LocalDateTime.now().plusSeconds(expires_sec).atZone(ZoneId.systemDefault()).toInstant());
         SecretKey key = new SecretKeySpec(secret.getBytes(), SignatureAlgorithm.HS512.getJcaName());
         return Jwts.builder()
-                .claim("userId", user.getUserId())
+                .claim("userId", user.getUser_id())
                 .claim("account", user.getAccount())
-                .claim("firstName", user.getFirstName())
+                .claim("firstName", user.getFirst_name())
                 .claim("sex", user.getSex())
                 .claim("phone", user.getPhone())
                 .claim("title", user.getTitle())
@@ -49,9 +49,9 @@ public class JwtUtil {
             SecretKey key = new SecretKeySpec(secret.getBytes(), SignatureAlgorithm.HS512.getJcaName());
             Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
             User user = new User()
-                    .setUserId(claims.get("userId", Long.class))
+                    .setUser_id(claims.get("userId", Long.class))
                     .setAccount(claims.get("account", String.class))
-                    .setFirstName(claims.get("firstName", String.class))
+                    .setFirst_name(claims.get("firstName", String.class))
                     .setSex(claims.get("sex", Integer.class))
                     .setPhone(claims.get("phone", String.class))
                     .setTitle(claims.get("title", Integer.class))

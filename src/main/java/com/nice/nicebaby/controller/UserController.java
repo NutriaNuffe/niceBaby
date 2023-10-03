@@ -35,7 +35,7 @@ public class UserController {
     @GetMapping
     public HttpResult<User> findById(HttpServletRequest request) {
         User user = (User) request.getAttribute("LoginInfo");
-        return userService.findById(user.getUserId());
+        return userService.findById(user.getUser_id());
     }
 
     @GetMapping("/getUserInfoByAccount")
