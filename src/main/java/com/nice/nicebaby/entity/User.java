@@ -13,6 +13,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -23,6 +25,10 @@ import java.sql.Timestamp;
 @Accessors(chain = true)
 @Table(name = "user")
 public class User {
+
+    @OneToMany(mappedBy = "user")
+    private Set<Department> departments = new HashSet<>();
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -58,9 +64,9 @@ public class User {
     @Schema(description = "職稱")
     private Integer title;
 
-    @Column(name = "department")
+    @Column(name = "department_id")
     @Schema(description = "部門")
-    private Integer department;
+    private Integer department_id;
 
     @Column(name = "address", length = 255)
     @Schema(description = "地址")

@@ -30,13 +30,14 @@ public class JwtUtil {
         Date expires = Date.from(LocalDateTime.now().plusSeconds(expires_sec).atZone(ZoneId.systemDefault()).toInstant());
         SecretKey key = new SecretKeySpec(secret.getBytes(), SignatureAlgorithm.HS512.getJcaName());
         return Jwts.builder()
-                .claim("userId", user.getUser_id())
+                .claim("user_id", user.getUser_id())
                 .claim("account", user.getAccount())
-                .claim("firstName", user.getFirst_name())
+                .claim("first_name", user.getFirst_name())
+                .claim("last_name", user.getLast_name())
                 .claim("sex", user.getSex())
                 .claim("phone", user.getPhone())
                 .claim("title", user.getTitle())
-                .claim("department", user.getDepartment())
+                .claim("department_id", user.getDepartment_id())
                 .claim("address", user.getAddress())
                 .claim("avatar", user.getAvatar())
                 .setExpiration(expires)
@@ -49,13 +50,14 @@ public class JwtUtil {
             SecretKey key = new SecretKeySpec(secret.getBytes(), SignatureAlgorithm.HS512.getJcaName());
             Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
             User user = new User()
-                    .setUser_id(claims.get("userId", Long.class))
+                    .setUser_id(claims.get("user_id", Long.class))
                     .setAccount(claims.get("account", String.class))
-                    .setFirst_name(claims.get("firstName", String.class))
+                    .setFirst_name(claims.get("first_name", String.class))
+                    .setFirst_name(claims.get("last_name", String.class))
                     .setSex(claims.get("sex", Integer.class))
                     .setPhone(claims.get("phone", String.class))
                     .setTitle(claims.get("title", Integer.class))
-                    .setDepartment(claims.get("department", Integer.class))
+                    .setDepartment_id(claims.get("department_id", Integer.class))
                     .setAddress(claims.get("address", String.class))
                     .setAvatar(claims.get("avatar", String.class));
             return user;

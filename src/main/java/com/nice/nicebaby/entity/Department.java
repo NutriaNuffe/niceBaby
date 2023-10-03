@@ -18,6 +18,9 @@ import javax.persistence.*;
 @Table(name = "department")
 public class Department {
 
+    @ManyToOne
+    private User user;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "department_id")
