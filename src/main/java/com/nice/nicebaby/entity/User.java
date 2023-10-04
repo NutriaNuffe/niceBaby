@@ -26,8 +26,13 @@ import java.util.Set;
 @Table(name = "user")
 public class User {
 
-    @OneToMany(mappedBy = "user")
-    private Set<Department> departments = new HashSet<>();
+    @ManyToMany(targetEntity = Department.class) // 一個 User 實體會對應到多個 Department 實體，一個 Department 實體會對應到多個 User
+    @JoinTable( // 中間表的註解，維護多對多的關聯
+            name = "user_department", // 中間表的名稱
+            joinColumns = @JoinColumn(name = "user_id"), // 對應 User 實體的欄位名稱
+            inverseJoinColumns = @JoinColumn(name = "department_id") // 對應 Department 欄位名稱
+    )
+    private Set<Department> departments = new HashSet<>(); // Set 確保元素不重複，HashSet 提供快速的查詢操作並確保元素是唯一的，如果沒有初始化，它可能會是 null，會導致空指針異常
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +40,7 @@ public class User {
     @Schema(description = "使用者編號")
     private Long user_id;
 
-    @Column(name = "account", length = 50)
+    @Column(name = "account", unique = true, length = 50)
     @Schema(description = "帳號")
     private String account;
 
@@ -63,10 +68,6 @@ public class User {
     @Column(name = "title")
     @Schema(description = "職稱")
     private Integer title;
-
-    @Column(name = "department_id")
-    @Schema(description = "部門")
-    private Integer department_id;
 
     @Column(name = "address", length = 255)
     @Schema(description = "地址")

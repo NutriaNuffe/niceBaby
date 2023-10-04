@@ -8,6 +8,8 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -18,8 +20,8 @@ import javax.persistence.*;
 @Table(name = "department")
 public class Department {
 
-    @ManyToOne
-    private User user;
+    @ManyToMany(mappedBy = "departments")
+    private Set<User> users = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +31,7 @@ public class Department {
 
     @Column(name = "account", length = 100)
     @Schema(description = "部門名稱")
-    private String departmentName;
+    private String department_name;
 
     @Column(name = "department_manager_id")
     @Schema(description = "部門主管編號")

@@ -37,7 +37,6 @@ public class JwtUtil {
                 .claim("sex", user.getSex())
                 .claim("phone", user.getPhone())
                 .claim("title", user.getTitle())
-                .claim("department_id", user.getDepartment_id())
                 .claim("address", user.getAddress())
                 .claim("avatar", user.getAvatar())
                 .setExpiration(expires)
@@ -57,7 +56,6 @@ public class JwtUtil {
                     .setSex(claims.get("sex", Integer.class))
                     .setPhone(claims.get("phone", String.class))
                     .setTitle(claims.get("title", Integer.class))
-                    .setDepartment_id(claims.get("department_id", Integer.class))
                     .setAddress(claims.get("address", String.class))
                     .setAvatar(claims.get("avatar", String.class));
             return user;
