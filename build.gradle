@@ -20,32 +20,43 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // Spring Web MVC：支持 Spring Web MVC 框架，構建 Web 應用程式的依賴項
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // JPA：支持 JPA（Java Persistence API），允許應用程式與資料庫互動
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // Lombok：可簡化 Java 代碼，例如自動生成 Getter 和 Setter 等方法
     annotationProcessor 'org.projectlombok:lombok'
+
+    // DevTools：自動重新啟動、熱插拔，提高開發效率的工具
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // MySQL：MySQL 資料庫的 Java 連接器
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // Tomcat
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+
+    // Test：測試相關依賴項，編寫和執行單元測試與集成測試
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // H2：H2 資料庫的依賴項，用於開發和測試
     runtimeOnly 'com.h2database:h2'
-    implementation group: 'org.springdoc', name: 'springdoc-openapi-core', version: '1.1.49'
-    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.5.13'
+
+    // jBCrypt：哈希和驗證密碼，用戶身份驗證
     implementation 'org.mindrot:jbcrypt:0.4'
+
+    // JWT：
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+    // Validation：提供對 Bean 驗證的支持，驗證資料的有效性和合法性。
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-//    testImplementation ('org.springframework.boot:spring-boot-starter-test') {
-//        exclude group: 'junit', module: 'junit' // 排除JUnit 4的依賴
-//    }
-//
-//    // JUnit 5 依賴設定
-//    testImplementation 'org.junit.jupiter:junit-jupiter-api' // JUnit 5 API 介面
-//    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine' // JUnit 5 測試框架的實作
-}
+    // Swagger：提供 Swagger UI
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-core', version: '1.1.49'
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.5.13'
 
-//tasks.named('test') {
-//	useJUnitPlatform()
-//}
+}

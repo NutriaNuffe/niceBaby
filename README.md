@@ -8,3 +8,4 @@
 
 * > Postman Collection：[nice.postman_collection.json](_doc/nice.postman_collection.json)
 * > Table Specification.xlsx：[https://reurl.cc/Y0eQAD](https://reurl.cc/Y0eQAD)
+* > Swagger：[http://localhost:8080/nice/api/swagger-ui.html](http://localhost:8080/nice/api/swagger-ui.html)
